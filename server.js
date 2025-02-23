@@ -3,8 +3,20 @@ const axios = require("axios");
 const cors = require("cors");
 const app = express();
 
-// Enable CORS
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'https://weather-app-using-node-js-vercel.vercel.app',
+    'http://localhost:3000'  // 为了本地开发测试
+  ],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Enable CORS with options
+app.use(cors(corsOptions));
 
 // Handle the /weather route
 app.get("/weather", async (req, res) => {
